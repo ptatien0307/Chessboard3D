@@ -673,18 +673,22 @@ export default function onClick(event, world, mouse, raycaster) {
                 raycaster._selectedMesh = null;
             }
         } else if (clickedObject.parent.name !== "BOARD" && clickedObject.name !== "path" && clickedObject.gltf.scene.name === "promotion") {
+            // Choose new piece for pawn promotion
             raycaster._selectedMesh = clickedObject.gltf.scene;
 
             raycaster._selectedMesh.userData.isAlive = true;
             raycaster._selectedMesh.userData.currPos = [raycaster._prevPiece.position.x, 0.5, raycaster._prevPiece.position.z];
             raycaster._selectedMesh.userData.isFirstMove = true;
 
+            // Set position
             gsap.to(raycaster._selectedMesh.position, {
                 x: raycaster._prevPiece.position.x,
                 y: 0.5,
                 z: raycaster._prevPiece.position.z,
                 duration: 0.5,
             });
+
+            // Pawn is unavailable
             gsap.to(raycaster._prevPiece.position, {
                 x: -2,
                 z: -2,
@@ -692,10 +696,27 @@ export default function onClick(event, world, mouse, raycaster) {
             });
             raycaster._prevPiece.userData.currPos = [-2, 0.5, -2];
             raycaster._selectedMesh.name = "Pawn_Promotion";
+
+            // Delete other pawn promotion options
             do {
                 var selectedObject = world.scene.children[3].getObjectByName("promotion");
                 world.scene.children[3].remove(selectedObject);
             } while (selectedObject !== undefined);
+
+            // Hide text
+            let promotion = document.querySelector("#promotion");
+            promotion.style.display = "none";
+
+            // Move camera
+            gsap.to(world.camera.position, {
+                x: 6.5,
+                y: 10,
+                z: 20,
+                duration: 1,
+                onUpdate: () => {
+                    world.controls.target = new THREE.Vector3(6.5, 0, 6.5);
+                },
+            });
         } else {
             // clickedObject is not a piece, choose destination for seleted piece
             let [isValid, isKillMove, isCastlingMove] = isMoveValid(_validMoves, [dst_x, 0.5, dst_z]);

@@ -37,6 +37,20 @@ resetbtn.addEventListener("click", () => {
     onReset(world, game);
 });
 
+// Instruction
+let menu = document.querySelector("#menu");
+menu.addEventListener("click", () => {
+    const menu_items = document.querySelector("#menu-items");
+    const icon = document.querySelector("#icon");
+    if (menu_items.style.display === "flex") {
+        menu_items.style.display = "none";
+        icon.style.transform = "rotate(0deg)";
+    } else {
+        icon.style.transform = "rotate(90deg)";
+        menu_items.style.display = "flex";
+    }
+});
+
 const animate = () => {
     requestAnimationFrame(animate);
     world.render();

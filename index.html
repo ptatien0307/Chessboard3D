@@ -10,14 +10,26 @@
 
 <body>
     <canvas id="background"></canvas>
-    <div id="options">
-        <button id="reset" type="button">Reset</button>
-    </div>
     <div id="promotion">
         <span>PAWN PROMOTION</span>
     </div>
-    <script type="module" src="./src/main.js"></script>
+    <div id="menu">
+        <div id="icon-container">
+            <i id="icon" class="fa-solid fa-angle-right" style="color: #ffffff;"></i>
+        </div>
+    </div>
+    <div id="menu-items">
+        <div id="camera">
+            Press 1, 2, 3 and 4 to change camera
+        </div>
 
+        <div id="reset">
+            Click to reset board -
+            <button id='reset-btn' type="button">Reset</button>
+        </div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+    <script src="https://kit.fontawesome.com/e1c8cea346.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

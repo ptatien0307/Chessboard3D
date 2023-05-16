@@ -1,4 +1,5 @@
 import { GLTFLoader } from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
+import * as THREE from "../node_modules/three/build/three.module.js";
 
 export default async function loadPiece(type, color) {
     const loader = new GLTFLoader();
@@ -33,7 +34,7 @@ export default async function loadPiece(type, color) {
         loaded_model.traverse(function (o) {
             if (o.isMesh) {
                 o.material.metalness = 0.5;
-                o.material.color.set(0xffffff);
+                o.material = new THREE.MeshPhongMaterial({ color: 0xffffff });
             }
         });
         loaded_model.userData.color = "white";
@@ -42,7 +43,7 @@ export default async function loadPiece(type, color) {
         loaded_model.traverse(function (o) {
             if (o.isMesh) {
                 o.material.metalness = 0.5;
-                o.material.color.set(0x808080);
+                o.material = new THREE.MeshPhongMaterial({ color: 0x808080 });
             }
         });
         loaded_model.userData.color = "black";

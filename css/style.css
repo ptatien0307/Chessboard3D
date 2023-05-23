@@ -52,7 +52,7 @@ canvas {
 #menu-items {
     top: 80;
     left: 25;
-    width: 20rem;
+    width: 25rem;
     display: none;
     flex-direction: column;
     justify-content: space-around;
@@ -83,4 +83,10 @@ canvas {
     font-size: 50;
     background-color: rgba(204, 255, 255, 0.7);
     display: none;
+}
+
+#backgroundoption {
+    position: absolute;
+    justify-content: space-around;
+    left: 200;
 }

@@ -32,25 +32,25 @@ export default class Scene {
         this.controls.target = new THREE.Vector3(6.5, 0, 6.5);
 
         // light
-        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.9);
+        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.4);
         directionalLight1.position.set(50, 50, 50);
         directionalLight1.castShadow = true;
         this.scene.add(directionalLight1);
         // this.scene.add(new THREE.CameraHelper(directionalLight1.shadow.camera));
 
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.9);
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4);
         directionalLight2.position.set(-50, 50, -50);
         directionalLight2.castShadow = true;
         this.scene.add(directionalLight2);
         // this.scene.add(new THREE.CameraHelper(directionalLight2.shadow.camera));
 
-        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.9);
+        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.4);
         directionalLight3.position.set(-50, 50, 50);
         directionalLight3.castShadow = true;
         this.scene.add(directionalLight3);
         // this.scene.add(new THREE.CameraHelper(directionalLight3.shadow.camera));
 
-        const directionalLight4 = new THREE.DirectionalLight(0xffffff, 0.9);
+        const directionalLight4 = new THREE.DirectionalLight(0xffffff, 0.4);
         directionalLight4.position.set(50, 50, -50);
         directionalLight4.castShadow = true;
         this.scene.add(directionalLight4);

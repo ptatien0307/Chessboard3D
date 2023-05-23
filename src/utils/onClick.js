@@ -15,9 +15,8 @@ sphere_enemy.name = "path";
 function isBlocked(world, enemyColor, x_path, z_path) {
     let flag_end = true;
     let flag_end_enemy = false;
-    console.log(world.scene.children[3]);
-    for (let k = 144; k <= world.scene.children[3].children.length - 1; k++) {
-        let temp_piece = world.scene.children[3].children[k];
+    for (let k = 144; k <= world.scene.children[5].children.length - 1; k++) {
+        let temp_piece = world.scene.children[5].children[k];
 
         let [x_piece, y_piece, z_piece] = temp_piece.userData.currPos;
 
@@ -527,9 +526,9 @@ function kingValidMoves(world, raycaster, isKingFirstMove) {
     // Check if castling is available and show castling valid moves
     if (raycaster._selectedMesh.userData.color == "black") {
         if (isKingFirstMove) {
-            if (world.scene.children[3].children[103].userData.isFirstMove) {
-                if (world.scene.children[3].children[107].userData.currPos !== world.scene.children[3].children[107].userData.origPos) {
-                    if (world.scene.children[3].children[111].userData.currPos !== world.scene.children[3].children[111].userData.origPos) {
+            if (world.scene.children[5].children[103 + 44].userData.isFirstMove) {
+                if (world.scene.children[5].children[107 + 44].userData.currPos !== world.scene.children[5].children[107 + 44].userData.origPos) {
+                    if (world.scene.children[5].children[111 + 44].userData.currPos !== world.scene.children[5].children[111 + 44].userData.origPos) {
                         let sphere_ = sphere_path.clone();
                         sphere_.position.set(x - 4, 0.5, z);
                         world.scene.add(sphere_);
@@ -537,10 +536,10 @@ function kingValidMoves(world, raycaster, isKingFirstMove) {
                     }
                 }
             }
-            if (world.scene.children[3].children[131].userData.isFirstMove) {
-                if (world.scene.children[3].children[119].userData.currPos !== world.scene.children[3].children[119].userData.origPos) {
-                    if (world.scene.children[3].children[123].userData.currPos !== world.scene.children[3].children[123].userData.origPos) {
-                        if (world.scene.children[3].children[127].userData.currPos !== world.scene.children[3].children[127].userData.origPos) {
+            if (world.scene.children[5].children[131 + 44].userData.isFirstMove) {
+                if (world.scene.children[5].children[119 + 44].userData.currPos !== world.scene.children[5].children[119 + 44].userData.origPos) {
+                    if (world.scene.children[5].children[123 + 44].userData.currPos !== world.scene.children[5].children[123 + 44].userData.origPos) {
+                        if (world.scene.children[5].children[127 + 44].userData.currPos !== world.scene.children[5].children[127 + 44].userData.origPos) {
                             let sphere_ = sphere_path.clone();
                             sphere_.position.set(x + 4, 0.5, z);
                             world.scene.add(sphere_);
@@ -552,9 +551,9 @@ function kingValidMoves(world, raycaster, isKingFirstMove) {
         }
     } else {
         if (isKingFirstMove) {
-            if (world.scene.children[3].children[100].userData.isFirstMove) {
-                if (world.scene.children[3].children[104].userData.currPos !== world.scene.children[3].children[104].userData.origPos) {
-                    if (world.scene.children[3].children[108].userData.currPos !== world.scene.children[3].children[108].userData.origPos) {
+            if (world.scene.children[5].children[100 + 44].userData.isFirstMove) {
+                if (world.scene.children[5].children[104 + 44].userData.currPos !== world.scene.children[5].children[104 + 44].userData.origPos) {
+                    if (world.scene.children[5].children[108 + 44].userData.currPos !== world.scene.children[5].children[108 + 44].userData.origPos) {
                         let sphere_ = sphere_path.clone();
                         sphere_.position.set(x - 4, 0.5, z);
                         world.scene.add(sphere_);
@@ -562,10 +561,10 @@ function kingValidMoves(world, raycaster, isKingFirstMove) {
                     }
                 }
             }
-            if (world.scene.children[3].children[128].userData.isFirstMove) {
-                if (world.scene.children[3].children[124].userData.currPos !== world.scene.children[3].children[124].userData.origPos) {
-                    if (world.scene.children[3].children[120].userData.currPos !== world.scene.children[3].children[120].userData.origPos) {
-                        if (world.scene.children[3].children[116].userData.currPos !== world.scene.children[3].children[116].userData.origPos) {
+            if (world.scene.children[5].children[128 + 44].userData.isFirstMove) {
+                if (world.scene.children[5].children[124 + 44].userData.currPos !== world.scene.children[5].children[124 + 44].userData.origPos) {
+                    if (world.scene.children[5].children[120 + 44].userData.currPos !== world.scene.children[5].children[120 + 44].userData.origPos) {
+                        if (world.scene.children[5].children[116 + 44].userData.currPos !== world.scene.children[5].children[116 + 44].userData.origPos) {
                             let sphere_ = sphere_path.clone();
                             sphere_.position.set(x + 4, 0.5, z);
                             world.scene.add(sphere_);
@@ -806,7 +805,7 @@ export default function onClick(event, world, mouse, raycaster) {
                     if (oldSelectedMesh.userData.color === "black") {
                         let [x_prev, y_prev, z_prev] = oldSelectedMesh.userData.origPos;
                         if (dst_x == x_prev - 4) {
-                            let rook = world.scene.children[3].children[103];
+                            let rook = world.scene.children[5].children[103 + 44];
                             // Move rook
                             moveAnimation(rook, [clickedObject.position.x + 2, clickedObject.position.z]);
 
@@ -815,7 +814,7 @@ export default function onClick(event, world, mouse, raycaster) {
                             rook.userData.isFirstMove = false;
                         }
                         if (dst_x == x_prev + 4) {
-                            let rook = world.scene.children[3].children[131];
+                            let rook = world.scene.children[5].children[131 + 44];
                             // Move rook
                             moveAnimation(rook, [clickedObject.position.x - 2, clickedObject.position.z]);
 
@@ -826,7 +825,7 @@ export default function onClick(event, world, mouse, raycaster) {
                     } else {
                         let [x_prev, y_prev, z_prev] = oldSelectedMesh.userData.origPos;
                         if (dst_x === x_prev - 4 && dst_z === z_prev) {
-                            let rook = world.scene.children[3].children[100];
+                            let rook = world.scene.children[5].children[100 + 44];
                             // Move rook
                             moveAnimation(rook, [clickedObject.position.x + 2, clickedObject.position.z]);
 
@@ -835,7 +834,7 @@ export default function onClick(event, world, mouse, raycaster) {
                             rook.userData.isFirstMove = false;
                         }
                         if (dst_x === x_prev + 4 && dst_z === z_prev) {
-                            let rook = world.scene.children[3].children[128];
+                            let rook = world.scene.children[5].children[128 + 44];
                             // Move rook
                             moveAnimation(rook, [clickedObject.position.x - 2, clickedObject.position.z]);
 

@@ -1,10 +1,11 @@
 import * as THREE from "../node_modules/three/build/three.module.js";
-
 import Scene from "./Scene.js";
 import ChessBoard from "./ChessBoard.js";
 import onChangeCamera from "./utils/onChangeCamera.js";
 import onReset from "./utils/onReset.js";
 import onClick from "./utils/onClick.js";
+import onChangeBackground from "./utils/onChangeBackground.js";
+import { RGBELoader } from "../../node_modules/three/examples/jsm/loaders/RGBELoader.js";
 
 // Init world
 const world = new Scene();
@@ -35,6 +36,44 @@ window.addEventListener("keydown", (event) => {
 let resetbtn = document.querySelector("#reset");
 resetbtn.addEventListener("click", () => {
     onReset(world, game);
+});
+// Change scene background
+let backgroundBtn2 = document.querySelector("#background2");
+backgroundBtn2.addEventListener("click", () => {
+    new RGBELoader().load("../../models/background/blocky_photo_studio_2k.hdr", function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        world.scene.background = texture;
+        world.scene.environment = texture;
+    });
+});
+let backgroundBtn3 = document.querySelector("#background3");
+backgroundBtn3.addEventListener("click", () => {
+    new RGBELoader().load("../../models/background/brown_photostudio_05_2k.hdr", function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        world.scene.background = texture;
+        world.scene.environment = texture;
+    });
+});
+let backgroundBtn4 = document.querySelector("#background4");
+backgroundBtn4.addEventListener("click", () => {
+    new RGBELoader().load("../../models/background/scythian_tombs_2_2k.hdr", function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        world.scene.background = texture;
+        world.scene.environment = texture;
+    });
+});
+let backgroundBtn5 = document.querySelector("#background5");
+backgroundBtn5.addEventListener("click", () => {
+    new RGBELoader().load("../../models/background/sunflowers_puresky_2k.hdr", function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        world.scene.background = texture;
+        world.scene.environment = texture;
+    });
+});
+let backgroundBtn1 = document.querySelector("#background1");
+backgroundBtn1.addEventListener("click", () => {
+    world.scene.background = null;
+    world.scene.environment = null;
 });
 
 // Instruction

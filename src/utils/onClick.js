@@ -617,10 +617,12 @@ function moveAnimation(piece, dst) {
 }
 
 let xb_d = 18,
-    zb_d = 18;
+    zb_d = 18,
+    yb_d = -0.02;
 
 let xw_d = -4,
-    zw_d = -4;
+    zw_d = -4,
+    yw_d = -0.02;
 
 export default function onClick(event, world, mouse, raycaster) {
     // Locate mouse coordinate
@@ -696,33 +698,32 @@ export default function onClick(event, world, mouse, raycaster) {
             });
 
             // Pawn is unavailable
-            gsap.to(raycaster._prevPiece.position, {
-                x: -2,
-                z: -2,
-                duration: 0.5,
-            });
             if (raycaster._prevPiece.userData.color === "white") {
                 gsap.to(raycaster._prevPiece.position, {
                     x: xw_d,
                     z: zw_d,
+                    y: yw_d,
                     duration: 0.5,
                 });
                 xw_d += 2;
                 if (xw_d === 18) {
                     zw_d += 2;
                     xw_d = -4;
+                    yw_d = -0.04;
                 }
                 raycaster._prevPiece.userData.currPos = [xw_d, 0.5, zw_d];
             } else {
                 gsap.to(raycaster._prevPiece.position, {
                     x: xb_d,
                     z: zb_d,
+                    y: yb_d,
                     duration: 0.5,
                 });
                 xb_d -= 2;
                 if (xb_d === -4) {
                     zb_d -= 2;
                     xb_d = 18;
+                    yb_d = -0.04;
                 }
                 raycaster._prevPiece.userData.currPos = [xb_d, 0.5, zb_d];
             }
@@ -764,24 +765,28 @@ export default function onClick(event, world, mouse, raycaster) {
                                 gsap.to(temp_piece.position, {
                                     x: xw_d,
                                     z: zw_d,
+                                    y: yw_d,
                                     duration: 0.5,
                                 });
                                 xw_d += 2;
                                 if (xw_d === 18) {
                                     zw_d += 2;
                                     xw_d = -4;
+                                    yw_d = -0.04;
                                 }
                                 temp_piece.userData.currPos = [xw_d, 0.5, zw_d];
                             } else {
                                 gsap.to(temp_piece.position, {
                                     x: xb_d,
                                     z: zb_d,
+                                    y: yb_d,
                                     duration: 0.5,
                                 });
                                 xb_d -= 2;
                                 if (xb_d === -4) {
                                     zb_d -= 2;
                                     xb_d = 18;
+                                    yb_d = -0.04;
                                 }
                                 temp_piece.userData.currPos = [xb_d, 0.5, zb_d];
                             }

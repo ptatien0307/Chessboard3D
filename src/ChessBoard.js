@@ -175,7 +175,6 @@ export default class ChessBoard {
                 // Add to board
                 this.board.add(piece);
             }
-            break;
         }
     }
 }

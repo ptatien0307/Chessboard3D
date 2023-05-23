@@ -5,7 +5,7 @@ export default class ChessBoard {
     constructor() {
         this.board = new THREE.Group();
         this.board.name = "BOARD";
-        this.colorValidMove = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        this.colorValidMove = new THREE.MeshPhongMaterial({ color: 0xffffff });
         this._initChessboard();
     }
 
@@ -16,9 +16,9 @@ export default class ChessBoard {
 
     async _createBoard() {
         let cubeGeo = new THREE.BoxGeometry(2, 1, 2);
-        let blackMat = new THREE.MeshBasicMaterial({ color: 0x6d4c3d });
-        let whiteMat = new THREE.MeshBasicMaterial({ color: 0xffffc1 });
-        let grayMat = new THREE.MeshBasicMaterial({ color: 0x41251c });
+        let blackMat = new THREE.MeshPhongMaterial({ color: 0x6d4c3d });
+        let whiteMat = new THREE.MeshPhongMaterial({ color: 0xffffc1 });
+        let grayMat = new THREE.MeshPhongMaterial({ color: 0x41251c });
 
         let flag = true;
         for (let x = 0; x < 16; x += 2) {
@@ -31,6 +31,7 @@ export default class ChessBoard {
                     flag = !flag;
                 }
                 cube.position.set(x, 0, z);
+                cube.name = "grid";
                 this.board.add(cube);
             }
             flag = !flag;
@@ -40,7 +41,18 @@ export default class ChessBoard {
             for (let z = -2; z < 18; z += 2) {
                 if (z === 16 || z === -2 || x === -2 || x === 16) {
                     var cube = new THREE.Mesh(cubeGeo, grayMat);
-                    cube.position.set(x, 0, z);
+                    cube.position.set(x, -0.25, z);
+                    cube.rotation.set(0, Math.PI / 2, 0);
+                }
+                this.board.add(cube);
+            }
+        }
+
+        for (let x = -4; x < 20; x += 2) {
+            for (let z = -4; z < 20; z += 2) {
+                if (z === 18 || z === -4 || x === -4 || x === 18) {
+                    var cube = new THREE.Mesh(cubeGeo, grayMat);
+                    cube.position.set(x, -0.5, z);
                     cube.rotation.set(0, Math.PI / 2, 0);
                 }
                 this.board.add(cube);
@@ -163,6 +175,7 @@ export default class ChessBoard {
                 // Add to board
                 this.board.add(piece);
             }
+            break;
         }
     }
 }

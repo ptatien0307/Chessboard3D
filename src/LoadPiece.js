@@ -33,7 +33,6 @@ export default async function loadPiece(type, color) {
         // white
         loaded_model.traverse(function (o) {
             if (o.isMesh) {
-                o.material.metalness = 0.5;
                 o.material = new THREE.MeshPhongMaterial({ color: 0xffffff });
             }
         });
@@ -42,7 +41,6 @@ export default async function loadPiece(type, color) {
         // black
         loaded_model.traverse(function (o) {
             if (o.isMesh) {
-                o.material.metalness = 0.5;
                 o.material = new THREE.MeshPhongMaterial({ color: 0x808080 });
             }
         });

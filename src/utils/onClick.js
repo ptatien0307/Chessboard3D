@@ -15,7 +15,8 @@ sphere_enemy.name = "path";
 function isBlocked(world, enemyColor, x_path, z_path) {
     let flag_end = true;
     let flag_end_enemy = false;
-    for (let k = 100; k <= world.scene.children[3].children.length - 1; k++) {
+    console.log(world.scene.children[3]);
+    for (let k = 144; k <= world.scene.children[3].children.length - 1; k++) {
         let temp_piece = world.scene.children[3].children[k];
 
         let [x_piece, y_piece, z_piece] = temp_piece.userData.currPos;
@@ -615,6 +616,12 @@ function moveAnimation(piece, dst) {
     });
 }
 
+let xb_d = 18,
+    zb_d = 18;
+
+let xw_d = -4,
+    zw_d = -4;
+
 export default function onClick(event, world, mouse, raycaster) {
     // Locate mouse coordinate
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -694,7 +701,32 @@ export default function onClick(event, world, mouse, raycaster) {
                 z: -2,
                 duration: 0.5,
             });
-            raycaster._prevPiece.userData.currPos = [-2, 0.5, -2];
+            if (raycaster._prevPiece.userData.color === "white") {
+                gsap.to(raycaster._prevPiece.position, {
+                    x: xw_d,
+                    z: zw_d,
+                    duration: 0.5,
+                });
+                xw_d += 2;
+                if (xw_d === 18) {
+                    zw_d += 2;
+                    xw_d = -4;
+                }
+                raycaster._prevPiece.userData.currPos = [xw_d, 0.5, zw_d];
+            } else {
+                gsap.to(raycaster._prevPiece.position, {
+                    x: xb_d,
+                    z: zb_d,
+                    duration: 0.5,
+                });
+                xb_d -= 2;
+                if (xb_d === -4) {
+                    zb_d -= 2;
+                    xb_d = 18;
+                }
+                raycaster._prevPiece.userData.currPos = [xb_d, 0.5, zb_d];
+            }
+
             raycaster._selectedMesh.name = "Pawn_Promotion";
 
             // Delete other pawn promotion options
@@ -722,7 +754,7 @@ export default function onClick(event, world, mouse, raycaster) {
             let [isValid, isKillMove, isCastlingMove] = isMoveValid(_validMoves, [dst_x, 0.5, dst_z]);
             if (isValid) {
                 if (isKillMove) {
-                    for (let k = 100; k <= world.scene.children[3].children.length - 1; k++) {
+                    for (let k = 144; k <= world.scene.children[3].children.length - 1; k++) {
                         let temp_piece = world.scene.children[3].children[k];
                         let [x_piece, y_piece, z_piece] = temp_piece.userData.currPos;
 
@@ -730,20 +762,31 @@ export default function onClick(event, world, mouse, raycaster) {
                             // Piece is killed and move to corner
                             if (temp_piece.userData.color === "white") {
                                 gsap.to(temp_piece.position, {
-                                    x: -2,
-                                    z: -2,
+                                    x: xw_d,
+                                    z: zw_d,
                                     duration: 0.5,
                                 });
+                                xw_d += 2;
+                                if (xw_d === 18) {
+                                    zw_d += 2;
+                                    xw_d = -4;
+                                }
+                                temp_piece.userData.currPos = [xw_d, 0.5, zw_d];
                             } else {
                                 gsap.to(temp_piece.position, {
-                                    x: 16,
-                                    z: 16,
+                                    x: xb_d,
+                                    z: zb_d,
                                     duration: 0.5,
                                 });
+                                xb_d -= 2;
+                                if (xb_d === -4) {
+                                    zb_d -= 2;
+                                    xb_d = 18;
+                                }
+                                temp_piece.userData.currPos = [xb_d, 0.5, zb_d];
                             }
 
                             // Update current position and isAlive flag
-                            temp_piece.userData.currPos = [-2, 0.5, -2];
                             temp_piece.userData.isAlive = false;
 
                             break;

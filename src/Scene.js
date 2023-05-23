@@ -11,12 +11,7 @@ export default class Scene {
 
     initScene() {
         // Camera
-        this.camera = new THREE.PerspectiveCamera(
-            75,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            1000
-        );
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.camera.position.set(6.5, 10, 20);
 
         // Scence
@@ -40,27 +35,26 @@ export default class Scene {
         const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.9);
         directionalLight1.position.set(50, 50, 50);
         directionalLight1.castShadow = true;
-        directionalLight1.shadow.mapSize.width = 2048;
-        directionalLight1.shadow.mapSize.height = 2048;
-        const d = 30;
-        directionalLight1.shadow.camera.left = -d;
-        directionalLight1.shadow.camera.right = d;
-        directionalLight1.shadow.camera.top = d;
-        directionalLight1.shadow.camera.bottom = -d;
         this.scene.add(directionalLight1);
         // this.scene.add(new THREE.CameraHelper(directionalLight1.shadow.camera));
 
         const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.9);
         directionalLight2.position.set(-50, 50, -50);
         directionalLight2.castShadow = true;
-        directionalLight2.shadow.mapSize.width = 2048;
-        directionalLight2.shadow.mapSize.height = 2048;
-        directionalLight2.shadow.camera.left = -d;
-        directionalLight2.shadow.camera.right = d;
-        directionalLight2.shadow.camera.top = d;
-        directionalLight2.shadow.camera.bottom = -d;
         this.scene.add(directionalLight2);
         // this.scene.add(new THREE.CameraHelper(directionalLight2.shadow.camera));
+
+        const directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.9);
+        directionalLight3.position.set(-50, 50, 50);
+        directionalLight3.castShadow = true;
+        this.scene.add(directionalLight3);
+        // this.scene.add(new THREE.CameraHelper(directionalLight3.shadow.camera));
+
+        const directionalLight4 = new THREE.DirectionalLight(0xffffff, 0.9);
+        directionalLight4.position.set(50, 50, -50);
+        directionalLight4.castShadow = true;
+        this.scene.add(directionalLight4);
+        // this.scene.add(new THREE.CameraHelper(directionalLight4.shadow.camera));
 
         const ambientLight = new THREE.AmbientLight(0x404040, 0.1);
         this.scene.add(ambientLight);

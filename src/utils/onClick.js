@@ -731,8 +731,8 @@ export default function onClick(event, world, mouse, raycaster) {
 
             // Delete other pawn promotion options
             do {
-                var selectedObject = world.scene.children[3].getObjectByName("promotion");
-                world.scene.children[3].remove(selectedObject);
+                var selectedObject = world.scene.children[5].getObjectByName("promotion");
+                world.scene.children[5].remove(selectedObject);
             } while (selectedObject !== undefined);
 
             // Hide text
@@ -754,8 +754,8 @@ export default function onClick(event, world, mouse, raycaster) {
             let [isValid, isKillMove, isCastlingMove] = isMoveValid(_validMoves, [dst_x, 0.5, dst_z]);
             if (isValid) {
                 if (isKillMove) {
-                    for (let k = 144; k <= world.scene.children[3].children.length - 1; k++) {
-                        let temp_piece = world.scene.children[3].children[k];
+                    for (let k = 144; k <= world.scene.children[5].children.length - 1; k++) {
+                        let temp_piece = world.scene.children[5].children[k];
                         let [x_piece, y_piece, z_piece] = temp_piece.userData.currPos;
 
                         if (dst_x == x_piece && dst_z === z_piece) {

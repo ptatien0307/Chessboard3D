@@ -29,7 +29,7 @@ export default async function onPromotion(world, color) {
         piece.userData.currPos = [pos, 10, 10];
         piece.userData.origPos = [10, 10, 10];
         piece.userData.isAlive = true;
-        world.scene.children[3].add(piece);
+        world.scene.children[5].add(piece);
         pos += 4;
     }
 }

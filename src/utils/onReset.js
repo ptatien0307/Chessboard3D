@@ -2,7 +2,8 @@ import { gsap } from "../../node_modules/gsap/all.js";
 
 export default function onReset(world, game) {
     for (const piece of game.board.children) {
-        if (piece.name) {
+        if (piece.name != "grid" && piece.name != "") {
+            console.log(piece);
             gsap.to(piece.position, {
                 x: piece.userData.origPos[0],
                 y: piece.userData.origPos[1],
@@ -16,7 +17,7 @@ export default function onReset(world, game) {
         }
     }
     do {
-        var selectedObject = world.scene.children[3].getObjectByName("Pawn_Promotion");
-        world.scene.children[3].remove(selectedObject);
+        var selectedObject = world.scene.children[5].getObjectByName("Pawn_Promotion");
+        world.scene.children[5].remove(selectedObject);
     } while (selectedObject !== undefined);
 }

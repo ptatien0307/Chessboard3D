@@ -13,6 +13,7 @@ world.initScene();
 
 // Init chessboard
 const game = new ChessBoard();
+const chessGroup = new THREE.Group();
 world.scene.add(game.board);
 
 // Init mouse and raycaster
@@ -20,11 +21,13 @@ const mouse = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
 raycaster._selectedMesh = null;
 raycaster._prevPieceName = null;
-
 raycaster._prevPiece = null;
+
+let flagChangeCamera = [true];
+
 // Select piece to move
 window.addEventListener("click", (event) => {
-    onClick(event, world, mouse, raycaster, game);
+    onClick(event, world, mouse, raycaster, flagChangeCamera);
 });
 
 // Change camera position
@@ -37,6 +40,7 @@ let resetbtn = document.querySelector("#reset");
 resetbtn.addEventListener("click", () => {
     onReset(world, game);
 });
+
 // Change scene background
 let backgroundBtn2 = document.querySelector("#background2");
 backgroundBtn2.addEventListener("click", () => {

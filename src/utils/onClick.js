@@ -615,6 +615,26 @@ function moveAnimation(piece, dst) {
     });
 }
 
+function changeCameraAfterAMove(world, flag) {
+    if (flag[0]) {
+        gsap.to(world.camera.position, {
+            x: 6.5,
+            y: 10,
+            z: -6.5,
+            duration: 1,
+        });
+        flag[0] = false;
+    } else {
+        gsap.to(world.camera.position, {
+            x: 6.5,
+            y: 10,
+            z: 20,
+            duration: 1,
+        });
+        flag[0] = true;
+    }
+}
+
 let xb_d = 18,
     zb_d = 18,
     yb_d = -0.02;
@@ -623,7 +643,7 @@ let xw_d = -4,
     zw_d = -4,
     yw_d = -0.02;
 
-export default function onClick(event, world, mouse, raycaster) {
+export default function onClick(event, world, mouse, raycaster, flagChangeCamera) {
     // Locate mouse coordinate
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -749,10 +769,17 @@ export default function onClick(event, world, mouse, raycaster) {
                     world.controls.target = new THREE.Vector3(6.5, 0, 6.5);
                 },
             });
+            set;
+
+            // Change camera after a move
+            setTimeout(() => {
+                changeCameraAfterAMove(world, flagChangeCamera);
+            }, 1000);
         } else {
             // clickedObject is not a piece, choose destination for seleted piece
             let [isValid, isKillMove, isCastlingMove] = isMoveValid(_validMoves, [dst_x, 0.5, dst_z]);
             if (isValid) {
+                // Is the move killing enemy piece
                 if (isKillMove) {
                     for (let k = 144; k <= world.scene.children[5].children.length - 1; k++) {
                         let temp_piece = world.scene.children[5].children[k];
@@ -844,9 +871,17 @@ export default function onClick(event, world, mouse, raycaster) {
                         }
                     }
                 }
+
+                // is the move promoting a pawn
                 if (raycaster._prevPieceName.includes("Pawn") && (dst_z === 0 || dst_z === 14)) {
                     onPromotion(world, raycaster._prevPiece.userData.color);
                 }
+
+                // Change camera after a move
+                setTimeout(() => {
+                    changeCameraAfterAMove(world, flagChangeCamera);
+                }, 1000);
+
                 // Move piece
                 moveAnimation(raycaster._selectedMesh, [clickedObject.position.x, clickedObject.position.z]);
 

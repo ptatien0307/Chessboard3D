@@ -654,7 +654,7 @@ export default function onClick(event, world, mouse, raycaster, flagChangeCamera
     if (found.length > 0) {
         const clickedObject = found[0].object;
         const [dst_x, dst_y, dst_z] = clickedObject.position;
-        if (clickedObject.parent.name !== "BOARD" && clickedObject.name !== "path" && clickedObject.gltf.scene.name !== "promotion") {
+        if (clickedObject.parent.name !== "BOARD" && clickedObject.name !== "path" && clickedObject.gltf.scene.name !== "promotion" && clickedObject.gltf.scene.userData.isAlive) {
             // clickedObject is a piece
             raycaster._prevPieceName = clickedObject.parent.name;
             const oldSelectedMesh = raycaster._selectedMesh;

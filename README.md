@@ -45,6 +45,7 @@ If a piece can kill enemy's piece, there will be a red dot on enemy piece
 
 # Features
 ## Change camera position
+Camera can be changed position by pressing keyboard or using mouse to drag
 <p align="center">
 <img src="https://github.com/ptatien0307/Chessboard3D/assets/79583501/3ccb832f-8d29-4dfd-8611-213e856da36b.png" alt="drawing" width="50%" height="50%"/>
 </p>
